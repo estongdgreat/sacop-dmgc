@@ -1,0 +1,1100 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-search.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title>DIOSDADO MACAPAGAL GOVERNMENT CENTER</title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="js/leaflet-search.js"></script>
+        <script src="data/DMGCBoundery_1.js"></script>
+        <script src="data/ROADS_2.js"></script>
+        <script src="data/AGENCIES_3.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        })
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+            if (bounds_group.getLayers().length) {
+                map.fitBounds(bounds_group.getBounds());
+            }
+        }
+        map.createPane('pane_Positron_0');
+        map.getPane('pane_Positron_0').style.zIndex = 400;
+        var layer_Positron_0 = L.tileLayer('https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+            pane: 'pane_Positron_0',
+            opacity: 1.0,
+            attribution: '<a href="https://cartodb.com/basemaps/">Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_Positron_0;
+        map.addLayer(layer_Positron_0);
+        function pop_DMGCBoundery_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['type'] !== null ? autolinker.link(feature.properties['type'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_DMGCBoundery_1_0() {
+            return {
+                pane: 'pane_DMGCBoundery_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_DMGCBoundery_1');
+        map.getPane('pane_DMGCBoundery_1').style.zIndex = 401;
+        map.getPane('pane_DMGCBoundery_1').style['mix-blend-mode'] = 'normal';
+        var layer_DMGCBoundery_1 = new L.geoJson(json_DMGCBoundery_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_DMGCBoundery_1',
+            layerName: 'layer_DMGCBoundery_1',
+            pane: 'pane_DMGCBoundery_1',
+            onEachFeature: pop_DMGCBoundery_1,
+            style: style_DMGCBoundery_1_0,
+        });
+        bounds_group.addLayer(layer_DMGCBoundery_1);
+        map.addLayer(layer_DMGCBoundery_1);
+        function pop_ROADS_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ROADS_2_0(feature) {
+            switch(String(feature.properties['Name'])) {
+                case 'Maagap':
+                    return {
+                pane: 'pane_ROADS_2',
+                opacity: 1,
+                color: 'rgba(0,0,4,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Maalaga':
+                    return {
+                pane: 'pane_ROADS_2',
+                opacity: 1,
+                color: 'rgba(29,16,71,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Mahusay':
+                    return {
+                pane: 'pane_ROADS_2',
+                opacity: 1,
+                color: 'rgba(80,18,123,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Makatao':
+                    return {
+                pane: 'pane_ROADS_2',
+                opacity: 1,
+                color: 'rgba(130,37,129,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Malikhain':
+                    return {
+                pane: 'pane_ROADS_2',
+                opacity: 1,
+                color: 'rgba(182,55,122,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Masinop':
+                    return {
+                pane: 'pane_ROADS_2',
+                opacity: 1,
+                color: 'rgba(230,81,100,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Matalino':
+                    return {
+                pane: 'pane_ROADS_2',
+                opacity: 1,
+                color: 'rgba(251,135,97,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Matulungin':
+                    return {
+                pane: 'pane_ROADS_2',
+                opacity: 1,
+                color: 'rgba(254,195,135,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_ROADS_2',
+                opacity: 1,
+                color: 'rgba(252,253,191,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_ROADS_2');
+        map.getPane('pane_ROADS_2').style.zIndex = 402;
+        map.getPane('pane_ROADS_2').style['mix-blend-mode'] = 'normal';
+        var layer_ROADS_2 = new L.geoJson(json_ROADS_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_ROADS_2',
+            layerName: 'layer_ROADS_2',
+            pane: 'pane_ROADS_2',
+            onEachFeature: pop_ROADS_2,
+            style: style_ROADS_2_0,
+        });
+        bounds_group.addLayer(layer_ROADS_2);
+        map.addLayer(layer_ROADS_2);
+        function pop_AGENCIES_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Code'] !== null ? autolinker.link(feature.properties['Code'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['AgencyName'] !== null ? autolinker.link(feature.properties['AgencyName'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_AGENCIES_3_0(feature) {
+            switch(String(feature.properties['AgencyName'])) {
+                case 'Bureau of Fire Protection':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(222,103,186,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Bureau of Fisheries and Aquatic Resources':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(69,204,42,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Bureau of Jail Management and Penology':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(200,153,107,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Bureau of Local Government Finance':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(194,202,36,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Bureau of Plant Industry':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(21,53,212,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Bureau of the Treasury':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(209,240,70,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Civil Service Commision':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(57,234,216,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Commision on Audit':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(226,28,219,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Commission on Higher Education':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(97,221,159,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Commission on Human Rights':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(200,108,55,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Commission on Population':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(43,204,81,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Cooperative Development Authority':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(104,220,193,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Department of Budget and Management':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(185,126,219,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Department of Education':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(163,229,82,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Department of Environment and Natural Resources':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(50,235,43,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Department of Health':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(98,237,186,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Department of Human Settlements and Urban Development':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(216,51,144,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Department of Interior and Local Government':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(180,213,109,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Department of Labor and Employment':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(23,83,224,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Department of Science and Technology':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(106,226,14,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Department of Social Welfare and Development':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(222,83,67,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Department of Trade and Industry':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(224,93,132,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Environment Management Bureau':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(129,103,214,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Hall of Justice':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(115,217,152,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Land Transportation Franchising and Regulatory Board':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,217,79,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Land Transportation Office':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(116,175,220,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Landbank of the Philippines':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(201,63,123,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Mines and Geosciences Bureau':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(210,94,223,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'National Economic and Development Authority':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(221,148,21,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'National Housing Authority':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(209,36,65,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'National Meat Inspection Service':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(115,213,73,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'National Police Commission':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(86,188,232,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'National Telecommunications Commission':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(168,111,225,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Office of Civil Defense':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(189,69,225,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Overseas Workers Welfare Administration':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(136,173,223,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Philippine Drug Enforcement Agency':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(210,141,119,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Philippine Post Office':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(202,122,189,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Philippine Red Cross':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(235,28,35,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Philippines Statistic Authority':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(127,118,207,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Phillipine Charity Sweepstakes Office':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(23,29,213,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Regional Government Center Park':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(221,200,133,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Fernando Police Station':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(123,237,134,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Social Security System':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(52,202,232,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Technical Education and Skills Development Authority':
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(121,62,222,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_AGENCIES_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(57,201,206,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_AGENCIES_3');
+        map.getPane('pane_AGENCIES_3').style.zIndex = 403;
+        map.getPane('pane_AGENCIES_3').style['mix-blend-mode'] = 'normal';
+        var layer_AGENCIES_3 = new L.geoJson(json_AGENCIES_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_AGENCIES_3',
+            layerName: 'layer_AGENCIES_3',
+            pane: 'pane_AGENCIES_3',
+            onEachFeature: pop_AGENCIES_3,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_AGENCIES_3_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_AGENCIES_3);
+        map.addLayer(layer_AGENCIES_3);
+            var title = new L.Control();
+            title.onAdd = function (map) {
+                this._div = L.DomUtil.create('div', 'info');
+                this.update();
+                return this._div;
+            };
+            title.update = function () {
+                this._div.innerHTML = '<h2>DIOSDADO MACAPAGAL GOVERNMENT CENTER</h2>';
+            };
+            title.addTo(map);
+            var abstract = new L.Control({'position':'bottomleft'});
+            abstract.onAdd = function (map) {
+                this._div = L.DomUtil.create('div',
+                'leaflet-control abstract');
+                this._div.id = 'abstract'
+
+                    abstract.show();
+                    return this._div;
+                };
+                abstract.show = function () {
+                    this._div.classList.remove("abstract");
+                    this._div.classList.add("abstractUncollapsed");
+                    this._div.innerHTML = 'This is the map of Diosdado Macapagal Government Center.<br /><br />Data Source:<br />Google Maps<br />Positron<br /><br />GIS Processing:<br />QGIS<br /><br />Layout by:<br />Ernest Aldrin T. Espino';
+            };
+            abstract.addTo(map);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'AGENCIES<br /><table><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_BureauofFireProtection0.png" /></td><td>Bureau of Fire Protection</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_BureauofFisheriesandAquaticResources1.png" /></td><td>Bureau of Fisheries and Aquatic Resources</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_BureauofJailManagementandPenology2.png" /></td><td>Bureau of Jail Management and Penology</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_BureauofLocalGovernmentFinance3.png" /></td><td>Bureau of Local Government Finance</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_BureauofPlantIndustry4.png" /></td><td>Bureau of Plant Industry</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_BureauoftheTreasury5.png" /></td><td>Bureau of the Treasury</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_CivilServiceCommision6.png" /></td><td>Civil Service Commision</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_CommisiononAudit7.png" /></td><td>Commision on Audit</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_CommissiononHigherEducation8.png" /></td><td>Commission on Higher Education</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_CommissiononHumanRights9.png" /></td><td>Commission on Human Rights</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_CommissiononPopulation10.png" /></td><td>Commission on Population</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_CooperativeDevelopmentAuthority11.png" /></td><td>Cooperative Development Authority</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_DepartmentofBudgetandManagement12.png" /></td><td>Department of Budget and Management</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_DepartmentofEducation13.png" /></td><td>Department of Education</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_DepartmentofEnvironmentandNaturalResources14.png" /></td><td>Department of Environment and Natural Resources</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_DepartmentofHealth15.png" /></td><td>Department of Health</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_DepartmentofHumanSettlementsandUrbanDevelopment16.png" /></td><td>Department of Human Settlements and Urban Development</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_DepartmentofInteriorandLocalGovernment17.png" /></td><td>Department of Interior and Local Government</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_DepartmentofLaborandEmployment18.png" /></td><td>Department of Labor and Employment</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_DepartmentofScienceandTechnology19.png" /></td><td>Department of Science and Technology</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_DepartmentofSocialWelfareandDevelopment20.png" /></td><td>Department of Social Welfare and Development</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_DepartmentofTradeandIndustry21.png" /></td><td>Department of Trade and Industry</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_EnvironmentManagementBureau22.png" /></td><td>Environment Management Bureau</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_HallofJustice23.png" /></td><td>Hall of Justice</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_LandTransportationFranchisingandRegulatoryBoard24.png" /></td><td>Land Transportation Franchising and Regulatory Board</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_LandTransportationOffice25.png" /></td><td>Land Transportation Office</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_LandbankofthePhilippines26.png" /></td><td>Landbank of the Philippines</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_MinesandGeosciencesBureau27.png" /></td><td>Mines and Geosciences Bureau</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_NationalEconomicandDevelopmentAuthority28.png" /></td><td>National Economic and Development Authority</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_NationalHousingAuthority29.png" /></td><td>National Housing Authority</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_NationalMeatInspectionService30.png" /></td><td>National Meat Inspection Service</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_NationalPoliceCommission31.png" /></td><td>National Police Commission</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_NationalTelecommunicationsCommission32.png" /></td><td>National Telecommunications Commission</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_OfficeofCivilDefense33.png" /></td><td>Office of Civil Defense</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_OverseasWorkersWelfareAdministration34.png" /></td><td>Overseas Workers Welfare Administration</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_PhilippineDrugEnforcementAgency35.png" /></td><td>Philippine Drug Enforcement Agency</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_PhilippinePostOffice36.png" /></td><td>Philippine Post Office</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_PhilippineRedCross37.png" /></td><td>Philippine Red Cross</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_PhilippinesStatisticAuthority38.png" /></td><td>Philippines Statistic Authority</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_PhillipineCharitySweepstakesOffice39.png" /></td><td>Phillipine Charity Sweepstakes Office</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_RegionalGovernmentCenterPark40.png" /></td><td>Regional Government Center Park</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_SanFernandoPoliceStation41.png" /></td><td>San Fernando Police Station</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_SocialSecuritySystem42.png" /></td><td>Social Security System</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_TechnicalEducationandSkillsDevelopmentAuthority43.png" /></td><td>Technical Education and Skills Development Authority</td></tr><tr><td style="text-align: center;"><img src="legend/AGENCIES_3_44.png" /></td><td></td></tr></table>': layer_AGENCIES_3,'ROADS<br /><table><tr><td style="text-align: center;"><img src="legend/ROADS_2_Maagap0.png" /></td><td>Maagap</td></tr><tr><td style="text-align: center;"><img src="legend/ROADS_2_Maalaga1.png" /></td><td>Maalaga</td></tr><tr><td style="text-align: center;"><img src="legend/ROADS_2_Mahusay2.png" /></td><td>Mahusay</td></tr><tr><td style="text-align: center;"><img src="legend/ROADS_2_Makatao3.png" /></td><td>Makatao</td></tr><tr><td style="text-align: center;"><img src="legend/ROADS_2_Malikhain4.png" /></td><td>Malikhain</td></tr><tr><td style="text-align: center;"><img src="legend/ROADS_2_Masinop5.png" /></td><td>Masinop</td></tr><tr><td style="text-align: center;"><img src="legend/ROADS_2_Matalino6.png" /></td><td>Matalino</td></tr><tr><td style="text-align: center;"><img src="legend/ROADS_2_Matulungin7.png" /></td><td>Matulungin</td></tr><tr><td style="text-align: center;"><img src="legend/ROADS_2_8.png" /></td><td></td></tr></table>': layer_ROADS_2,'<img src="legend/DMGCBoundery_1.png" /> DMGC Boundery': layer_DMGCBoundery_1,"Positron": layer_Positron_0,}).addTo(map);
+        setBounds();
+        var i = 0;
+        layer_ROADS_2.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_ROADS_2'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_AGENCIES_3.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Code'] !== null?String('<div style="color: #000000; font-size: 12pt; font-weight: bold; font-family: \'Open Sans Condensed\', sans-serif;">' + layer.feature.properties['Code']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_AGENCIES_3'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        map.addControl(new L.Control.Search({
+            layer: layer_AGENCIES_3,
+            initial: false,
+            hideMarkerOnCollapse: true,
+            propertyName: 'AgencyName'}));
+        document.getElementsByClassName('search-button')[0].className +=
+         ' fa fa-binoculars';
+        resetLabels([layer_ROADS_2,layer_AGENCIES_3]);
+        map.on("zoomend", function(){
+            resetLabels([layer_ROADS_2,layer_AGENCIES_3]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_ROADS_2,layer_AGENCIES_3]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_ROADS_2,layer_AGENCIES_3]);
+        });
+        </script>
+    </body>
+</html>
